@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alan Walker — Symitar Specialist</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #ffffff;
+      --bg-secondary: #f7f7f5;
+      --bg-tertiary: #f0efeb;
+      --text-primary: #1a1a18;
+      --text-secondary: #6b6b67;
+      --text-tertiary: #a0a09c;
+      --border: rgba(0,0,0,0.1);
+      --border-md: rgba(0,0,0,0.18);
+      --blue-bg: #E6F1FB;
+      --blue-text: #0C447C;
+      --blue-mid: #185FA5;
+      --teal-bg: #E1F5EE;
+      --teal-text: #0F6E56;
+      --accent: #378ADD;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #1a1a18;
+        --bg-secondary: #222220;
+        --bg-tertiary: #2a2a28;
+        --text-primary: #f0efeb;
+        --text-secondary: #a0a09c;
+        --text-tertiary: #6b6b67;
+        --border: rgba(255,255,255,0.1);
+        --border-md: rgba(255,255,255,0.18);
+        --blue-bg: #042C53;
+        --blue-text: #B5D4F4;
+        --blue-mid: #85B7EB;
+        --teal-bg: #04342C;
+        --teal-text: #9FE1CB;
+        --accent: #85B7EB;
+      }
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: var(--bg);
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+
+    a { text-decoration: none; color: inherit; }
+
+    /* ── Layout ── */
+    .container { max-width: 860px; margin: 0 auto; padding: 0 1.5rem; }
+
+    /* ── Nav ── */
+    nav {
+      padding: 1.5rem 0;
+      border-bottom: 0.5px solid var(--border);
+      position: sticky;
+      top: 0;
+      background: var(--bg);
+      z-index: 100;
+    }
+    nav .container { display: flex; justify-content: space-between; align-items: center; }
+    .nav-name { font-size: 15px; font-weight: normal; letter-spacing: 0.02em; color: var(--text-primary); font-family: 'Georgia', serif; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { font-size: 13px; color: var(--text-secondary); font-family: -apple-system, 'Helvetica Neue', sans-serif; letter-spacing: 0.03em; transition: color 0.15s; }
+    .nav-links a:hover { color: var(--text-primary); }
+
+    /* ── Hero ── */
+    .hero { padding: 6rem 0 5rem; }
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 7px;
+      font-size: 12px; font-family: -apple-system, 'Helvetica Neue', sans-serif;
+      color: var(--blue-text); background: var(--blue-bg);
+      border-radius: 999px; padding: 4px 14px; margin-bottom: 2rem;
+      letter-spacing: 0.04em;
+    }
+    .hero-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); display: inline-block; animation: pulse 2s infinite; }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+    .hero h1 {
+      font-size: clamp(36px, 6vw, 58px);
+      font-weight: normal;
+      line-height: 1.1;
+      color: var(--text-primary);
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.02em;
+    }
+    .hero h1 em { font-style: italic; color: var(--text-secondary); }
+    .hero-bio {
+      font-size: 16px; color: var(--text-secondary);
+      line-height: 1.8; max-width: 560px; margin-bottom: 2.5rem;
+      font-family: -apple-system, 'Helvetica Neue', sans-serif;
+    }
+    .hero-cta { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn {
+      display: inline-block; padding: 10px 22px;
+      border-radius: 6px; font-size: 14px;
+      font-family: -apple-system, 'Helvetica Neue', sans-serif;
+      cursor: pointer; border: 0.5px solid var(--border-md);
+      color: var(--text-primary); background: transparent;
+      transition: background 0.15s, border-color 0.15s;
+      letter-spacing: 0.01em;
+    }
+    .btn:hover { background: var(--bg-secondary); }
+    .btn-fill { background: var(--text-primary); color: var(--bg); border-color: transparent; }
+    .btn-fill:hover { opacity: 0.85; background: var(--text-primary); }
+
+    /* ── Section ── */
+    .section { padding: 4rem 0; border-top: 0.5px solid var(--border); }
+    .section-header { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 2.5rem; }
+    .section-title {
+      font-size: 22px; font-weight: normal; color: var(--text-primary);
+      letter-spacing: -0.01em;
+    }
+    .section-note {
+      font-size: 12px; color: var(--text-tertiary);
+      font-family: -apple-system, 'Helvetica Neue', sans-serif;
+    }
+
+    /* ── About ── */
+    .about-grid { display: grid; grid-template-columns: 3fr 2fr; gap: 3.5rem; align-items: start; }
+    .about-text p {
+      font-size: 15px; color: var(--text-secondary);
+      line-height: 1.85; margin-bottom: 1.1rem;
+      font-family: -apple-system, 'Helvetica Neue', sans-serif;
+    }
+    .about-text p:last-child { margin-bottom: 0; }
+    .about-meta { display: flex; flex-direction: column; gap: 1.5rem; }
+    .meta-item {}
+    .meta-label {
+      font-size: 10px; font-weight: normal; color: var(--text-tertiary);
+      text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 4px;
+      font-family: -apple-system, 'Helvetica Neue', sans-serif;
+    }
+    .meta-value {
+      font-size: 14px; color: var(--text-primary);
+      font-family: -apple-system, 'Helvetica Neue', sans-serif;
+    }
+    .meta-value.available { color: var(--teal-text); }
+
+    /* ── Skills ── */
+    .skills-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+      gap: 1px; border: 0.5px solid var(--border); border-radius: 10px; overflow: hidden;
+    }
+    .skill-group {
+      padding: 1.25rem 1.35rem;
+      background: var(--bg);
+      border-right: 0.5px solid var(--border);
+      border-bottom: 0.5px solid var(--border);
+    }
+    .skill-group-label {
+      font-size: 10px; color: var(--blue-mid);
+      text-transform: uppercase; letter-spacing: 0.1em;
+      margin-bottom: 0.85rem;
+      font-family: -apple-system, 'Helvetica Neue', sans-serif;
+    }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .skill-tag {
+      font-size: 12px; color: var(--text-secondary);
+      background: var(--bg-secondary);
+      border: 0.5px solid var(--border);
+      border-radius: 4px; padding: 3px 9px;
+      font-family: -apple-system, 'Helvetica Neue', sans-serif;
+    }
+
+    /* ── Projects ── */
+    .projects-list {
+      display: flex; flex-direction: column; gap: 0;
+      border: 0.5px solid var(--border); border-radius: 10px; overflow: hidden;
+    }
+    .project-row {
+      display: grid; grid-template-columns: 1fr auto auto;
+      align-items: center; gap: 1.5rem;
+      padding: 1.4rem 1.5rem;
+      background: var(--bg);
+      border-bottom: 0.5px solid var(--border);
+      cursor: pointer;
+      transition: background 0.12s;
+    }
+    .project-row:last-child { border-bottom: none; }
+    .project-row:hover { background: var(--bg-secondary); }
+    .project-name {
+      font-size: 15px; color: var(--text-primary); margin-bottom: 4px;
+      font-family: -apple-system, 'Helvetica Neue', sans-serif; font-weight: 500;
+    }
+    .project-desc {
+      font-size: 13px; color: var(--text-secondary); line-height: 1.55;
+      font-family: -apple-system, 'Helvetica Neue', sans-serif;
+    }
+    .project-badge {
+      font-size: 11px; color: var(--teal-text); background: var(--teal-bg);
+      border-radius: 4px; padding: 3px 10px; white-space: nowrap;
+      font-family: -apple-system, 'Helvetica Neue', sans-serif;
+    }
+    .project-arrow { font-size: 16px; color: var(--text-tertiary); }
+
+    /* ── Footer ── */
+    footer {
+      padding: 2.5rem 0;
+      border-top: 0.5px solid var(--border);
+      margin-top: 2rem;
+    }
+    footer .container { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+    footer p { font-size: 13px; color: var(--text-tertiary); font-family: -apple-system, 'Helvetica Neue', sans-serif; }
+    .footer-links { display: flex; gap: 1.75rem; }
+    .footer-links a { font-size: 13px; color: var(--text-secondary); font-family: -apple-system, 'Helvetica Neue', sans-serif; transition: color 0.15s; }
+    .footer-links a:hover { color: var(--text-primary); }
+
+    /* ── Responsive ── */
+    @media (max-width: 620px) {
+      .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .project-row { grid-template-columns: 1fr; gap: 0.75rem; }
+      .project-arrow { display: none; }
+      .hero { padding: 4rem 0 3.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="container">
+      <span class="nav-name">Alan Walker</span>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container">
+
+    <section class="hero">
+      <h1>Symitar specialist.<br><em>Credit union tech, done right.</em></h1>
+      <p class="hero-bio">
+        I'm a Symitar system administrator and PowerOn programmer with deep expertise in credit union core banking systems — from system operations and OpCon automation to SymXchange API integration. I build reliable, efficient solutions that keep financial institutions running smoothly.
+      </p>
+      <div class="hero-cta">
+        <a href="https://www.linkedin.com/in/alan-walker-it/" target="_blank" class="btn btn-fill">View LinkedIn</a>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="section-header">
+        <span class="section-title">About me</span>
+      </div>
+      <div class="about-grid">
+        <div class="about-text">
+          <p>I specialize in the Symitar ecosystem — the core banking platform used by hundreds of credit unions across the country. My work spans system administration, operator responsibilities, custom PowerOn programming, and integrating external systems via the SymXchange API.</p>
+          <p>I take pride in writing clean, maintainable PowerOn specfiles and automating workflows with OpCon so that operations run without a hitch — even at 2am. I thrive at the intersection of technology and financial operations, where reliability isn't optional.</p>
+          <p>When I'm not working on core banking systems, I enjoy home improvement projects, family vacations, and 3D printing.</p>
+        </div>
+        <div class="about-meta">
+          <div class="meta-item">
+            <div class="meta-label">Specialization</div>
+            <div class="meta-value">Symitar / Episys core banking</div>
+          </div>
+          <div class="meta-item">
+            <div class="meta-label">Location</div>
+            <div class="meta-value">Ocala, Florida</div>
+          </div>
+          <div class="meta-item">
+            <div class="meta-label">Experience</div>
+            <div class="meta-value">6+ years in credit union tech</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="skills">
+      <div class="section-header">
+        <span class="section-title">Skills & expertise</span>
+      </div>
+      <div class="skills-grid">
+        <div class="skill-group">
+          <div class="skill-group-label">Core platform</div>
+          <div class="skill-tags">
+            <span class="skill-tag">Symitar / Episys</span>
+            <span class="skill-tag">Sym Admin</span>
+            <span class="skill-tag">Sym Operator</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-label">Programming</div>
+          <div class="skill-tags">
+            <span class="skill-tag">PowerOn</span>
+            <span class="skill-tag">Specfiles</span>
+            <span class="skill-tag">SymXchange API</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-label">Automation</div>
+          <div class="skill-tags">
+            <span class="skill-tag">OpCon</span>
+            <span class="skill-tag">Job scheduling</span>
+            <span class="skill-tag">Workflow design</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-label">Domain</div>
+          <div class="skill-tags">
+            <span class="skill-tag">Credit unions</span>
+            <span class="skill-tag">Core banking</span>
+            <span class="skill-tag">Financial ops</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="projects">
+      <div class="section-header">
+        <span class="section-title">Projects</span>
+      </div>
+      <div class="projects-list">
+        <div class="project-row">
+          <div>
+            <div class="project-name">SymXchange REST Wrapper</div>
+            <div class="project-desc">Translates Symitar's SOAP/XML SymXchange API into a modern REST interface, covering all available services via persistent WSDLs — making Symitar integrations accessible to any system that speaks JSON.</div>
+          </div>
+          <span class="project-badge">REST / SymXchange</span>
+          <span class="project-arrow">→</span>
+        </div>
+        <div class="project-row">
+          <div>
+            <div class="project-name">On-Premise Member Email Platform</div>
+            <div class="project-desc">A self-hosted email platform built for airgapped environments where cloud ESPs aren't an option. Capable of hundreds of thousands of sends daily with NCUA-compliant logging, approval workflows, and retention policies baked in.</div>
+          </div>
+          <span class="project-badge">Compliance</span>
+          <span class="project-arrow">→</span>
+        </div>
+        <div class="project-row">
+          <div>
+            <div class="project-name">Lobby Management System</div>
+            <div class="project-desc">A web app that replaces paper sign-ins with digital check-in, member routing, and wait time management. Integrates with Symitar via SymXchange to surface member data at check-in and allow MSRs to recap visits directly to the account.</div>
+          </div>
+          <span class="project-badge">Web App</span>
+          <span class="project-arrow">→</span>
+        </div>
+      </div>
+    </section>
+
+
+  </div>
+
+  <footer>
+    <div class="container">
+      <p>© 2026 Alan Walker</p>
+      <div class="footer-links">
+        <a href="https://www.linkedin.com/in/alan-walker-it/" target="_blank">LinkedIn</a>
+        <a href="https://github.com/awalker7312" target="_blank">GitHub</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
